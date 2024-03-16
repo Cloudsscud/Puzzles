@@ -1,0 +1,36 @@
+2024\03\16
+
+#include<stdio.h>
+int num = 0;
+//汉诺塔问题
+void Hanoi(int n, char A, char B, char C)//n为盘子总数量，按顺序确定为起始柱子，中间柱子（工具柱子）， 目标柱子
+{
+	if (n == 1)//起始柱子上仅有一个盘子
+	{
+		printf("%c->%c\n", A, C);//从起始柱子到目标柱子
+		num++;
+	}
+	else//有多个盘子
+	{
+		Hanoi(n - 1, A, C, B);
+		//先将起始柱子A上方的(n - 1)个非最大盘子全移动到工具柱子B上
+
+		printf("%c->%c\n", A, C);
+		//再将起始柱子A上最大的盘子移动到目标柱子C
+		num++;
+
+		Hanoi(n - 1, B, A, C);
+		//最后将工具柱子B上的剩余盘子移动到目标柱子C
+	}
+}
+
+int main()
+{
+	int n = 0;
+	printf("请输入A柱上盘子数量，然后由我来给你提供执行方案\n");
+	printf("请输入:> ");
+	scanf("%d", &n);
+	Hanoi(n, 'A', 'B', 'C');//盘子总数量，起始柱，工具柱，目标柱
+	printf("次数为%d\n", num);//操作总次数
+	return 0;
+}
